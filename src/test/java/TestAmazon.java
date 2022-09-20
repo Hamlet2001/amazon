@@ -17,7 +17,7 @@ public class TestAmazon {
         homePage.chooseCategory();
         SearchResultPage searchResultPage = new SearchResultPage(DriverFactory.getDriver());
         searchResultPage.waitForSearchResultPageLoaded();
-        softAssert.assertEquals(searchResultPage.getSearchResultText().replace('"', ' '), " Java ");
+        softAssert.assertEquals(searchResultPage.getSearchResultText().replaceAll("\"", ""),homePage.SEARCH_TEXT);
         softAssert.assertEquals("16", searchResultPage.getCountInPage().toString());
         softAssert.assertAll();
     }

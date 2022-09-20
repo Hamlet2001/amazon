@@ -15,7 +15,7 @@ public class HomePage extends BasePage {
     }
 
     protected final String HOME_URL = "https://www.amazon.com";
-    protected final String INPUT_TEXT = "Java";
+    public final String SEARCH_TEXT = "Java";
 
     public void openHomePage() {
         driver.manage().window().maximize();
@@ -40,7 +40,7 @@ public class HomePage extends BasePage {
     public void chooseCategory() {
         dropDownButton.click();
         preferredCategory.click();
-        inputForSearch.sendKeys(INPUT_TEXT);
+        inputForSearch.sendKeys(SEARCH_TEXT);
         searchButton.click();
     }
     public void waitForHomePageLoaded() {
