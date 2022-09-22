@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SearchResultPage {
     WebDriver driver;
@@ -16,31 +18,32 @@ public class SearchResultPage {
     public SearchResultPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-
     }
 
-    @FindBy(xpath = "//*[@id=\"search\"]/span/div/h1/div/div[1]/div/div/span[3]")
+    @FindBy(css = "span[class='a-color-state a-text-bold']")
     protected WebElement searchResult;
     @FindBy(xpath = "//*[@id=\"search\"]/span/div/h1/div/div[1]/div/div/span[1]")
     protected WebElement numberOfResultsInPage;
-    @FindBy(xpath = "//div[@class='s-result-item s-asin sg-col-0-of-12 sg-col-16-of-20 sg-col s-widget-spacing-small sg-col-12-of-16']")
+    @FindBy(css = "div[data-component-type='s-search-result']")
     protected List<WebElement> listOfResults;
-    @FindBy(xpath = "//*[@id=\"nav-logo-sprites\"]")
-    protected WebElement amazonLogo;
 
     public String getSearchResultText() {
         return searchResult.getText();
     }
 
-    public String getNumberOfResultInPage() {
-        return numberOfResultsInPage.getText();
+    public int getNumberOfResultInPage() {
+        String string = numberOfResultsInPage.getText();
+        Pattern pattern = Pattern.compile("(?<=1-)\\d+(?= of)");
+        Matcher matcher = pattern.matcher(string);
+        matcher.find();
+        return Integer.parseInt(matcher.group());
     }
 
-    public Integer getCountInPage() {
+    public int getCountInPage() {
         return listOfResults.size();
     }
 
     public void waitForSearchResultPageLoaded() {
-        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(amazonLogo));
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(searchResult));
     }
 }
