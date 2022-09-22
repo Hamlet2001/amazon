@@ -24,9 +24,7 @@ public class HomePage extends BasePage {
 
     @FindBy(id = "glow-ingress-line2")
     protected WebElement deliveryAddress;
-    @FindBy(id = "nav-search-dropdown-card")
-    protected WebElement dropDownButton;
-    @FindBy(css = "#searchDropdownBox > option:nth-child(6)")
+    @FindBy(xpath = "//option[contains(text(),'Books')]")
     protected WebElement preferredCategory;
     @FindBy(id = "twotabsearchtextbox")
     protected WebElement inputForSearch;
@@ -38,11 +36,14 @@ public class HomePage extends BasePage {
     }
 
     public void chooseCategory() {
-        dropDownButton.click();
         preferredCategory.click();
-        inputForSearch.sendKeys(SEARCH_TEXT);
+    }
+
+    public void searchText(String s) {
+        inputForSearch.sendKeys(s);
         searchButton.click();
     }
+
     public void waitForHomePageLoaded() {
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(searchButton));
     }
