@@ -22,7 +22,7 @@ public class SearchResultPage {
 
     @FindBy(css = "span[class='a-color-state a-text-bold']")
     protected WebElement searchResult;
-    @FindBy(xpath = "//*[@id=\"search\"]/span/div/h1/div/div[1]/div/div/span[1]")
+    @FindBy(xpath = "//span[contains(text(),'results')]")
     protected WebElement numberOfResultsInPage;
     @FindBy(css = "div[data-component-type='s-search-result']")
     protected List<WebElement> listOfResults;
