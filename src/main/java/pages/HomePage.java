@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -15,7 +16,6 @@ public class HomePage extends BasePage {
     }
 
     protected final String HOME_URL = "https://www.amazon.com";
-    public final String SEARCH_TEXT = "Java";
 
     public void openHomePage() {
         driver.manage().window().maximize();
@@ -24,8 +24,8 @@ public class HomePage extends BasePage {
 
     @FindBy(id = "glow-ingress-line2")
     protected WebElement deliveryAddress;
-    @FindBy(xpath = "//option[contains(text(),'Books')]")
-    protected WebElement preferredCategory;
+    @FindBy(id = "searchDropdownBox")
+    protected WebElement dropdownButton;
     @FindBy(id = "twotabsearchtextbox")
     protected WebElement inputForSearch;
     @FindBy(id = "nav-search-submit-button")
@@ -35,12 +35,13 @@ public class HomePage extends BasePage {
         return deliveryAddress.getText();
     }
 
-    public void chooseCategory() {
-        preferredCategory.click();
+    public void chooseCategory(String preferredCategory) {
+        Select select = new Select(dropdownButton);
+        select.selectByVisibleText(preferredCategory);
     }
 
-    public void searchText(String s) {
-        inputForSearch.sendKeys(s);
+    public void searchText(String textForSearch) {
+        inputForSearch.sendKeys(textForSearch);
         searchButton.click();
     }
 
