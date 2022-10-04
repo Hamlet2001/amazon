@@ -30,6 +30,12 @@ public class HomePage extends BasePage {
     protected WebElement inputForSearch;
     @FindBy(id = "nav-search-submit-button")
     protected WebElement searchButton;
+    @FindBy(css = "i[class='hm-icon nav-sprite']")
+    protected WebElement allButton;
+    @FindBy(linkText = "Smart Home")
+    protected WebElement smartHomeButton;
+    @FindBy(linkText = "Smart Home Lighting")
+    protected WebElement smartHomeLightingButton;
 
     public String getDeliveryAddress() {
         return deliveryAddress.getText();
@@ -43,6 +49,16 @@ public class HomePage extends BasePage {
     public void searchText(String textForSearch) {
         inputForSearch.sendKeys(textForSearch);
         searchButton.click();
+    }
+
+    public void clickTheAllButton() {
+        allButton.click();
+    }
+
+    public void selectCategory() {
+        smartHomeButton.click();
+        new WebDriverWait(this.driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(smartHomeLightingButton));
+        smartHomeLightingButton.click();
     }
 
     public void waitForHomePageLoaded() {

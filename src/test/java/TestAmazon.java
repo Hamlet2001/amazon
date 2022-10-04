@@ -1,10 +1,9 @@
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-import pages.HomePage;
-import pages.SearchResultPage;
+import pages.*;
 
 public class TestAmazon {
     @BeforeMethod
@@ -30,7 +29,28 @@ public class TestAmazon {
         softAssert.assertAll();
     }
 
-    @AfterMethod
+    @Test
+    public void testForCheckAllRatings() {
+        HomePage homePage = new HomePage(DriverFactory.getDriver());
+        homePage.openHomePage();
+        homePage.waitForHomePageLoaded();
+        homePage.clickTheAllButton();
+        homePage.selectCategory();
+        SelectedCategoryPage selectedCategoryPage = new SelectedCategoryPage(DriverFactory.getDriver());
+        selectedCategoryPage.waitForSearchResultPageLoaded();
+        SelectRandomItemPage selectRandomItemPage = new SelectRandomItemPage(DriverFactory.getDriver());
+        selectRandomItemPage.waitForSelectRandomItemPageLoaded();
+        selectRandomItemPage.clickRandomItem();
+        AllRatingsPage allRatingsPage = new AllRatingsPage(DriverFactory.getDriver());
+        allRatingsPage.waitForAllRatingsPageLoaded();
+        allRatingsPage.clickAllRatings();
+        allRatingsPage.waitForAllRatingsOpened();
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(allRatingsPage.sumOfAllRatings(), 100);
+        softAssert.assertAll();
+    }
+
+    @AfterTest
     public void tearDown() {
         WebDriver driver = DriverFactory.getDriver();
         if (driver != null) {
