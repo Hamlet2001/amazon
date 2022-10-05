@@ -57,7 +57,7 @@ public class HomePage extends BasePage {
 
     public void selectCategory() {
         smartHomeButton.click();
-        new WebDriverWait(this.driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(smartHomeLightingButton));
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(smartHomeLightingButton));
         smartHomeLightingButton.click();
     }
 
