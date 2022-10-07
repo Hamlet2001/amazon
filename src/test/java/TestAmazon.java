@@ -1,5 +1,3 @@
-import initDriver.BrowserType;
-import initDriver.DriverFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
@@ -11,16 +9,6 @@ public class TestAmazon {
     @BeforeMethod
     public void initDriver() {
         DriverFactory.initDriver(BrowserType.CHROME);
-    }
-
-    public void selectCategory() {
-        HomePage homePage = new HomePage(DriverFactory.getDriver());
-        homePage.openHomePage();
-        homePage.waitForHomePageLoaded();
-        SelectCategoryPage selectedCategoryPage = new SelectCategoryPage(DriverFactory.getDriver());
-        selectedCategoryPage.clickTheAllButton();
-        selectedCategoryPage.selectCategoryOne("Smart Home");
-        selectedCategoryPage.selectCategoryTwo("Smart Home Lighting");
     }
 
     @Test
@@ -43,8 +31,14 @@ public class TestAmazon {
 
     @Test
     public void testForCheckAllRatings() {
-        selectCategory();
-        RandomItemPage selectRandomItemPage = new RandomItemPage(DriverFactory.getDriver());
+        HomePage homePage = new HomePage(DriverFactory.getDriver());
+        homePage.openHomePage();
+        homePage.waitForHomePageLoaded();
+        homePage.clickTheAllButton();
+        homePage.selectCategory();
+        SelectedCategoryPage selectedCategoryPage = new SelectedCategoryPage(DriverFactory.getDriver());
+        selectedCategoryPage.waitForSearchResultPageLoaded();
+        SelectRandomItemPage selectRandomItemPage = new SelectRandomItemPage(DriverFactory.getDriver());
         selectRandomItemPage.waitForSelectRandomItemPageLoaded();
         selectRandomItemPage.clickRandomItem();
         AllRatingsPage allRatingsPage = new AllRatingsPage(DriverFactory.getDriver());
@@ -53,20 +47,6 @@ public class TestAmazon {
         allRatingsPage.waitForAllRatingsOpened();
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(allRatingsPage.sumOfAllRatings(), 100);
-        softAssert.assertAll();
-    }
-
-    @Test
-    public void CheckPaginationAndHoveringOnBestSeller() {
-        selectCategory();
-        AllResultsPage allResultsPage = new AllResultsPage(DriverFactory.getDriver());
-        allResultsPage.waitForAllResultsPageLoaded();
-        allResultsPage.clickOnAllResultsButton();
-        allResultsPage.checkForIsDisplayedPagination();
-        allResultsPage.checkTheFirstPageIsSelected();
-        allResultsPage.hoverToRandomBestSeller();
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(allResultsPage.getCountOfMatchesHoveringText(), 1);
         softAssert.assertAll();
     }
 

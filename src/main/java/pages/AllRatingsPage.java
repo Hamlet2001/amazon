@@ -8,6 +8,7 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -15,12 +16,8 @@ import java.time.Duration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class AllRatingsPage extends BasePage {
-
-    public AllRatingsPage(WebDriver driver) {
-        super(driver);
-    }
-
+public class AllRatingsPage {
+    WebDriver driver;
     @FindBy(id = "acrCustomerReviewLink")
     protected WebElement allRatings;
     @FindBy(xpath = "//*[@id=\"histogramTable\"]/tbody/tr[1]/td[3]/span[2]/a")
@@ -34,6 +31,11 @@ public class AllRatingsPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"histogramTable\"]/tbody/tr[5]/td[3]/span[2]/a")
     protected WebElement oneRatings;
     protected int rating;
+
+    public AllRatingsPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
 
     public void clickAllRatings() {
         allRatings.click();
