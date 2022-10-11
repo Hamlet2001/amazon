@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
-import java.util.Random;
 
 public class AllResultsPage extends BasePage {
 
@@ -25,44 +24,31 @@ public class AllResultsPage extends BasePage {
     protected WebElement paginationDiv;
     @FindBy(linkText = "Visit the help section")
     protected WebElement visitTheHelpSectionLink;
-    @FindBy(css = "span[aria-label='Current page, page 1']")
-    protected WebElement pageOneButton;
     @FindBy(css = "span[class='a-badge-supplementary-text a-text-ellipsis']")
-    protected List<WebElement> listOfBestSellersSpan;
+    protected List<WebElement> listOfBestSellersHoveringText;
 
     public void clickOnAllResultsButton() {
         allResultsButton.click();
     }
 
-    public void checkForIsDisplayedPagination() {
+    public boolean checkForIsDisplayedPagination() {
         new WebDriverWait(driver, Duration.ofSeconds(15)).until(ExpectedConditions.elementToBeClickable(visitTheHelpSectionLink));
-        paginationDiv.isDisplayed();
+        return paginationDiv.isDisplayed();
+    }
+    public int getCountOfBestSellers(){
+        return listOfBestSellers.size();
     }
 
-    public void checkTheFirstPageIsSelected() {
-        pageOneButton.isSelected();
-    }
-
-    protected int indexOfBestSeller;
-
-    public void hoverToRandomBestSeller() {
-        Actions action = new Actions(driver);
-        Random random = new Random();
-        indexOfBestSeller = random.nextInt(listOfBestSellers.size());
-        WebElement el = listOfBestSellers.get(indexOfBestSeller);
-        action.moveToElement(el).build().perform();
-    }
-
-    protected int count = 0;
-    protected String[] allHoveringTests = {"in Electrical Light Switches", "in Ceiling Fan Wall Controls", "in Dimmer Switches",
-            "in Motion-Activated Wall Switches", "in Home Automation Hubs & Controllers"};
-
-    public int getCountOfMatchesHoveringText() {
-        for (String s : allHoveringTests) {
-            if (listOfBestSellersSpan.get(indexOfBestSeller).getText().equals(s))
-                count++;
+    public String hoverToBestSeller(int indexOfBestSeller) {
+        try {
+            Actions action = new Actions(driver);
+            WebElement el = listOfBestSellers.get(indexOfBestSeller);
+            action.moveToElement(el).build().perform();
+            return listOfBestSellersHoveringText.get(indexOfBestSeller).getText();
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
+            return "";
         }
-        return count;
     }
 
     public void waitForAllResultsPageLoaded() {
