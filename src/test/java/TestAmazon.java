@@ -62,11 +62,11 @@ public class TestAmazon {
         AllResultsPage allResultsPage = new AllResultsPage(DriverFactory.getDriver());
         allResultsPage.waitForAllResultsPageLoaded();
         allResultsPage.clickOnAllResultsButton();
-        allResultsPage.checkForIsDisplayedPagination();
-        allResultsPage.checkTheFirstPageIsSelected();
-        allResultsPage.hoverToRandomBestSeller();
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(allResultsPage.getCountOfMatchesHoveringText(), 1);
+        softAssert.assertTrue(allResultsPage.checkForIsDisplayedPagination());
+        if (allResultsPage.getCountOfBestSellers() > 0) {
+            softAssert.assertFalse(allResultsPage.hoverToBestSeller(2).isEmpty());
+        }
         softAssert.assertAll();
     }
 
