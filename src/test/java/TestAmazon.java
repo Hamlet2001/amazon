@@ -70,6 +70,27 @@ public class TestAmazon {
         softAssert.assertAll();
     }
 
+    @Test
+    public void CheckFilteringFunctionality() {
+        HomePage homePage = new HomePage(DriverFactory.getDriver());
+        homePage.openHomePage();
+        homePage.waitForHomePageLoaded();
+        homePage.clickOnTodaySDeals("Today's Deals");
+        TodaySDealsPage todaySDealsPage = new TodaySDealsPage(DriverFactory.getDriver());
+        todaySDealsPage.waitTodaySDealsPageLoaded();
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals("Select All", todaySDealsPage.getTextFromSelectAllButton());
+        String filterItemOne = "Baby";
+        String filterItemTwo = "Electronics";
+        todaySDealsPage.selectTwoFilterItems(filterItemOne, filterItemTwo);
+        todaySDealsPage.waitForTwoFilterItemsLoaded();
+        softAssert.assertTrue(todaySDealsPage.isSelectedTwoFilterCheckboxes(filterItemOne, filterItemTwo));
+        softAssert.assertEquals("Clear", todaySDealsPage.getTextFromClearButton());
+        todaySDealsPage.clickOnClearButton();
+        softAssert.assertFalse(todaySDealsPage.anyCheckboxIsSelected(), "Any checkbox was selected");
+        softAssert.assertAll();
+    }
+
     @AfterTest
     public void tearDown() {
         WebDriver driver = DriverFactory.getDriver();

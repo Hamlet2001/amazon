@@ -23,6 +23,8 @@ public class HomePage extends BasePage {
         driver.get(HOME_URL);
     }
 
+    @FindBy(id = "nav-logo-sprites")
+    protected WebElement amazonLogo;
     @FindBy(id = "glow-ingress-line2")
     protected WebElement deliveryAddress;
     @FindBy(id = "searchDropdownBox")
@@ -31,7 +33,6 @@ public class HomePage extends BasePage {
     protected WebElement inputForSearch;
     @FindBy(id = "nav-search-submit-button")
     protected WebElement searchButton;
-
 
     public String getDeliveryAddress() {
         return deliveryAddress.getText();
@@ -45,6 +46,15 @@ public class HomePage extends BasePage {
     public void searchText(String textForSearch) {
         inputForSearch.sendKeys(textForSearch);
         searchButton.click();
+    }
+
+    public void clickOnAmazonLogo() {
+        amazonLogo.click();
+    }
+
+    public void clickOnTodaySDeals(String text) {
+        clickOnAmazonLogo();
+        driver.findElement(By.linkText(text)).click();
     }
 
     public void waitForHomePageLoaded() {
