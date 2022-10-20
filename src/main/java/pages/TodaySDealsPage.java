@@ -58,7 +58,7 @@ public class TodaySDealsPage extends BasePage {
 
     public void waitForTwoFilterItemsLoaded() {
         List<WebElement> listOfFilterItems = driver.
-                findElements(By.xpath("//a[contains(@class, 'a-link-normal DealCard')]"));
+                findElements(By.xpath("//div[contains(@class, 'DealGridItem-module__dealItemContent')]"));
         new WebDriverWait(driver, Duration.ofSeconds(20)).
                 until(ExpectedConditions.elementToBeClickable(listOfFilterItems.get(listOfFilterItems.size() - 1)));
     }
