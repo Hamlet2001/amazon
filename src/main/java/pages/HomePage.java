@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,8 +24,6 @@ public class HomePage extends BasePage {
         driver.get(HOME_URL);
     }
 
-    @FindBy(id = "nav-logo-sprites")
-    protected WebElement amazonLogo;
     @FindBy(id = "glow-ingress-line2")
     protected WebElement deliveryAddress;
     @FindBy(id = "searchDropdownBox")
@@ -33,6 +32,8 @@ public class HomePage extends BasePage {
     protected WebElement inputForSearch;
     @FindBy(id = "nav-search-submit-button")
     protected WebElement searchButton;
+    @FindBy(linkText = "Today's Deals")
+    protected WebElement todaySDeals;
 
     public String getDeliveryAddress() {
         return deliveryAddress.getText();
@@ -48,13 +49,14 @@ public class HomePage extends BasePage {
         searchButton.click();
     }
 
-    public void clickOnAmazonLogo() {
-        amazonLogo.click();
-    }
-
-    public void clickOnTodaySDeals(String text) {
-        clickOnAmazonLogo();
-        driver.findElement(By.linkText(text)).click();
+    public void clickOnTodaySDeals() {
+        try {
+            if (driver.findElement(By.cssSelector("div[data-toaster-slot='DEFAULT']")).isDisplayed()) {
+                driver.findElement(By.xpath("//div[@class='glow-toaster-footer']/span[contains(@class,'dismiss')]")).click();
+            }
+        } catch (NoSuchElementException ignored) {
+        }
+        todaySDeals.click();
     }
 
     public void waitForHomePageLoaded() {

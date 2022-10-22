@@ -75,7 +75,7 @@ public class TestAmazon {
         HomePage homePage = new HomePage(DriverFactory.getDriver());
         homePage.openHomePage();
         homePage.waitForHomePageLoaded();
-        homePage.clickOnTodaySDeals("Today's Deals");
+        homePage.clickOnTodaySDeals();
         TodaySDealsPage todaySDealsPage = new TodaySDealsPage(DriverFactory.getDriver());
         todaySDealsPage.waitTodaySDealsPageLoaded();
         SoftAssert softAssert = new SoftAssert();
