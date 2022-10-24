@@ -1,6 +1,5 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,6 +33,10 @@ public class HomePage extends BasePage {
     protected WebElement searchButton;
     @FindBy(linkText = "Today's Deals")
     protected WebElement todaySDeals;
+    @FindBy(css = "div[data-toaster-slot='DEFAULT']")
+    protected WebElement deliveryAddressChangeText;
+    @FindBy(xpath = "//div[@class='glow-toaster-footer']/span[contains(@class,'dismiss')]")
+    protected WebElement donTChangeButton;
 
     public String getDeliveryAddress() {
         return deliveryAddress.getText();
@@ -51,8 +54,8 @@ public class HomePage extends BasePage {
 
     public void clickOnTodaySDeals() {
         try {
-            if (driver.findElement(By.cssSelector("div[data-toaster-slot='DEFAULT']")).isDisplayed()) {
-                driver.findElement(By.xpath("//div[@class='glow-toaster-footer']/span[contains(@class,'dismiss')]")).click();
+            if (deliveryAddressChangeText.isDisplayed()) {
+                donTChangeButton.click();
             }
         } catch (NoSuchElementException ignored) {
         }

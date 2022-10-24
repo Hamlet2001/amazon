@@ -63,11 +63,13 @@ public class TodaySDealsPage extends BasePage {
 
     public void waitForTwoFilterItemsLoaded() {
         WebDriverWait wait = new WebDriverWait(driver, ofSeconds(15));
-        wait.until((ExpectedCondition<Boolean>) driver -> {
-            if (listOfFilterItems.size() > 0)
-                return true;
-            else
-                return false;
+        wait.until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver driver) {
+                if (listOfFilterItems.size() > 0)
+                    return true;
+                else
+                    return false;
+            }
         });
         new WebDriverWait(driver, ofSeconds(20)).
                 until(ExpectedConditions.elementToBeClickable(listOfFilterItems.get(listOfFilterItems.size() - 1)));

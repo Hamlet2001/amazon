@@ -57,7 +57,7 @@ public class TestAmazon {
     }
 
     @Test
-    public void CheckPaginationAndHoveringOnBestSeller() {
+    public void checkPaginationAndHoveringOnBestSeller() {
         selectCategory();
         AllResultsPage allResultsPage = new AllResultsPage(DriverFactory.getDriver());
         allResultsPage.waitForAllResultsPageLoaded();
@@ -71,7 +71,7 @@ public class TestAmazon {
     }
 
     @Test
-    public void CheckFilteringFunctionality() {
+    public void checkFilteringFunctionality() {
         HomePage homePage = new HomePage(DriverFactory.getDriver());
         homePage.openHomePage();
         homePage.waitForHomePageLoaded();
