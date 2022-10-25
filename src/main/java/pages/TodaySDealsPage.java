@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -25,7 +24,8 @@ public class TodaySDealsPage extends BasePage {
     protected List<WebElement> listOfFilterCheckboxes;
     @FindBy(linkText = "Clear")
     protected WebElement clearButton;
-    @FindBy(xpath = "//div[contains(@class, 'Content')]//a[contains(@class, 'Card')]")
+    final String listOfFilterItemsLocatorText = "//div[contains(@class, 'Content')]//a[contains(@class, 'Card')]";
+    @FindBy(xpath = listOfFilterItemsLocatorText)
     protected List<WebElement> listOfFilterItems;
 
     public String getTextFromSelectAllButton() {
@@ -62,15 +62,8 @@ public class TodaySDealsPage extends BasePage {
     }
 
     public void waitForTwoFilterItemsLoaded() {
-        WebDriverWait wait = new WebDriverWait(driver, ofSeconds(15));
-        wait.until(new ExpectedCondition<Boolean>() {
-            public Boolean apply(WebDriver driver) {
-                if (listOfFilterItems.size() > 0)
-                    return true;
-                else
-                    return false;
-            }
-        });
+        new WebDriverWait(driver, ofSeconds(20)).
+                until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath(listOfFilterItemsLocatorText), 0));
         new WebDriverWait(driver, ofSeconds(20)).
                 until(ExpectedConditions.elementToBeClickable(listOfFilterItems.get(listOfFilterItems.size() - 1)));
     }
