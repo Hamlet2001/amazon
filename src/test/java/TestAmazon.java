@@ -23,6 +23,13 @@ public class TestAmazon {
         selectedCategoryPage.selectCategoryTwo("Smart Home Lighting");
     }
 
+    public void openHomePageAndClickOnTodaySDealButton() {
+        HomePage homePage = new HomePage(DriverFactory.getDriver());
+        homePage.openHomePage();
+        homePage.waitForHomePageLoaded();
+        homePage.clickOnTodaySDeals();
+    }
+
     @Test
     public void testForChoosingAmazonCategory() {
         String textForSearch = "Java";
@@ -72,10 +79,7 @@ public class TestAmazon {
 
     @Test
     public void checkFilteringFunctionality() {
-        HomePage homePage = new HomePage(DriverFactory.getDriver());
-        homePage.openHomePage();
-        homePage.waitForHomePageLoaded();
-        homePage.clickOnTodaySDeals();
+        openHomePageAndClickOnTodaySDealButton();
         TodaySDealsPage todaySDealsPage = new TodaySDealsPage(DriverFactory.getDriver());
         todaySDealsPage.waitTodaySDealsPageLoaded();
         SoftAssert softAssert = new SoftAssert();
@@ -88,6 +92,21 @@ public class TestAmazon {
         softAssert.assertEquals("Clear", todaySDealsPage.getTextFromClearButton());
         todaySDealsPage.clickOnClearButton();
         softAssert.assertFalse(todaySDealsPage.anyCheckboxIsSelected(), "Any checkbox was selected");
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void filterFunctionality() {
+        openHomePageAndClickOnTodaySDealButton();
+        TodaySDealsPage todaySDealsPage = new TodaySDealsPage(DriverFactory.getDriver());
+        todaySDealsPage.waitTodaySDealsPageLoaded();
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals("Select All", todaySDealsPage.getTextFromSelectAllButton());
+        todaySDealsPage.clickOnWomenSFashionRitual();
+        WomenSFashionFromDailyRitualPage womenSFashionFromDailyRitualPage = new WomenSFashionFromDailyRitualPage(DriverFactory.getDriver());
+        womenSFashionFromDailyRitualPage.waitForWomenSFashionFromDailyRitualPageLoaded();
+        womenSFashionFromDailyRitualPage.clickOnFilterButtonUpTo25();
+        softAssert.assertTrue(womenSFashionFromDailyRitualPage.makeSureTheValuesAreEqualToOrLessThan2500Cents());
         softAssert.assertAll();
     }
 
