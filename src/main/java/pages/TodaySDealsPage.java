@@ -27,8 +27,8 @@ public class TodaySDealsPage extends BasePage {
     final String listOfFilterItemsLocatorText = "//div[contains(@class, 'Content')]//a[contains(@class, 'Card')]";
     @FindBy(xpath = listOfFilterItemsLocatorText)
     protected List<WebElement> listOfFilterItems;
-    @FindBy(linkText = "Women's Fashion from Daily Ritual")
-    protected WebElement womenSFashionRitual;
+    @FindBy(linkText = "Fashion from Daily Ritual")
+    protected WebElement fashionFromDailyRitual;
 
 
     public String getTextFromSelectAllButton() {
@@ -65,7 +65,7 @@ public class TodaySDealsPage extends BasePage {
     }
 
     public void clickOnWomenSFashionRitual() {
-        womenSFashionRitual.click();
+        fashionFromDailyRitual.click();
     }
 
     public void waitForTwoFilterItemsLoaded() {

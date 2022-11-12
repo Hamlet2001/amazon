@@ -1,37 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
+<testng-results ignored="0" total="5" passed="4" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2022-10-07T15:16:03 AMT" name="AmazonAllTests" finished-at="2022-10-07T15:16:34 AMT" duration-ms="30219">
+  <suite started-at="2022-10-25T18:23:06 AMT" name="AmazonAllTests" finished-at="2022-10-25T18:24:13 AMT" duration-ms="66332">
     <groups>
     </groups>
-    <test started-at="2022-10-07T15:16:03 AMT" name="TestAmazon" finished-at="2022-10-07T15:16:34 AMT" duration-ms="30219">
+    <test started-at="2022-10-25T18:23:06 AMT" name="TestAmazon" finished-at="2022-10-25T18:24:13 AMT" duration-ms="66332">
       <class name="TestAmazon">
-        <test-method is-config="true" signature="initDriver()[pri:0, instance:TestAmazon@40ef3420]" started-at="2022-10-07T15:16:03 AMT" name="initDriver" finished-at="2022-10-07T15:16:05 AMT" duration-ms="1290" status="PASS">
+        <test-method is-config="true" signature="initDriver()[pri:0, instance:TestAmazon@402bba4f]" started-at="2022-10-25T18:23:06 AMT" name="initDriver" finished-at="2022-10-25T18:23:09 AMT" duration-ms="2765" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initDriver -->
-        <test-method signature="CheckPaginationAndHoveringOnBestSeller()[pri:0, instance:TestAmazon@40ef3420]" started-at="2022-10-07T15:16:05 AMT" name="CheckPaginationAndHoveringOnBestSeller" finished-at="2022-10-07T15:16:16 AMT" duration-ms="11348" status="PASS">
+        <test-method signature="checkFilteringFunctionality()[pri:0, instance:TestAmazon@402bba4f]" started-at="2022-10-25T18:23:09 AMT" name="checkFilteringFunctionality" finished-at="2022-10-25T18:23:29 AMT" duration-ms="20236" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- CheckPaginationAndHoveringOnBestSeller -->
-        <test-method signature="testForCheckAllRatings()[pri:0, instance:TestAmazon@40ef3420]" started-at="2022-10-07T15:16:16 AMT" name="testForCheckAllRatings" finished-at="2022-10-07T15:16:28 AMT" duration-ms="11905" status="PASS">
+        </test-method> <!-- checkFilteringFunctionality -->
+        <test-method is-config="true" signature="initDriver()[pri:0, instance:TestAmazon@402bba4f]" started-at="2022-10-25T18:23:29 AMT" name="initDriver" finished-at="2022-10-25T18:23:29 AMT" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initDriver -->
+        <test-method signature="checkPaginationAndHoveringOnBestSeller()[pri:0, instance:TestAmazon@402bba4f]" started-at="2022-10-25T18:23:29 AMT" name="checkPaginationAndHoveringOnBestSeller" finished-at="2022-10-25T18:23:42 AMT" duration-ms="12391" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkPaginationAndHoveringOnBestSeller -->
+        <test-method is-config="true" signature="initDriver()[pri:0, instance:TestAmazon@402bba4f]" started-at="2022-10-25T18:23:42 AMT" name="initDriver" finished-at="2022-10-25T18:23:42 AMT" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initDriver -->
+        <test-method signature="filterFunctionality()[pri:0, instance:TestAmazon@402bba4f]" started-at="2022-10-25T18:23:42 AMT" name="filterFunctionality" finished-at="2022-10-25T18:23:52 AMT" duration-ms="9825" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- filterFunctionality -->
+        <test-method is-config="true" signature="initDriver()[pri:0, instance:TestAmazon@402bba4f]" started-at="2022-10-25T18:23:52 AMT" name="initDriver" finished-at="2022-10-25T18:23:52 AMT" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initDriver -->
+        <test-method signature="testForCheckAllRatings()[pri:0, instance:TestAmazon@402bba4f]" started-at="2022-10-25T18:23:52 AMT" name="testForCheckAllRatings" finished-at="2022-10-25T18:24:07 AMT" duration-ms="15124" status="FAIL">
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[The following asserts failed:
+expected [100] but found [101]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: The following asserts failed:
+expected [100] but found [101]
+at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:46)
+at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:30)
+at TestAmazon.testForCheckAllRatings(TestAmazon.java:63)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:677)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:221)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:962)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:194)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:806)
+at org.testng.TestRunner.run(TestRunner.java:601)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:433)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:427)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:387)
+at org.testng.SuiteRunner.run(SuiteRunner.java:330)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1256)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1176)
+at org.testng.TestNG.runSuites(TestNG.java:1099)
+at org.testng.TestNG.run(TestNG.java:1067)
+at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:324)
+at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:74)
+at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:123)
+at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:456)
+at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:169)
+at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:595)
+at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:581)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testForCheckAllRatings -->
-        <test-method is-config="true" signature="initDriver()[pri:0, instance:TestAmazon@40ef3420]" started-at="2022-10-07T15:16:16 AMT" name="initDriver" finished-at="2022-10-07T15:16:16 AMT" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="initDriver()[pri:0, instance:TestAmazon@402bba4f]" started-at="2022-10-25T18:24:07 AMT" name="initDriver" finished-at="2022-10-25T18:24:07 AMT" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initDriver -->
-        <test-method is-config="true" signature="initDriver()[pri:0, instance:TestAmazon@40ef3420]" started-at="2022-10-07T15:16:28 AMT" name="initDriver" finished-at="2022-10-07T15:16:28 AMT" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- initDriver -->
-        <test-method signature="testForChoosingAmazonCategory()[pri:0, instance:TestAmazon@40ef3420]" started-at="2022-10-07T15:16:28 AMT" name="testForChoosingAmazonCategory" finished-at="2022-10-07T15:16:33 AMT" duration-ms="5328" status="PASS">
+        <test-method signature="testForChoosingAmazonCategory()[pri:0, instance:TestAmazon@402bba4f]" started-at="2022-10-25T18:24:07 AMT" name="testForChoosingAmazonCategory" finished-at="2022-10-25T18:24:12 AMT" duration-ms="5271" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testForChoosingAmazonCategory -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestAmazon@40ef3420]" started-at="2022-10-07T15:16:33 AMT" name="tearDown" finished-at="2022-10-07T15:16:34 AMT" duration-ms="316" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestAmazon@402bba4f]" started-at="2022-10-25T18:24:12 AMT" name="tearDown" finished-at="2022-10-25T18:24:13 AMT" duration-ms="640" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->

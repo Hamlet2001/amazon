@@ -103,7 +103,7 @@ public class TestAmazon {
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals("Select All", todaySDealsPage.getTextFromSelectAllButton());
         todaySDealsPage.clickOnWomenSFashionRitual();
-        WomenSFashionFromDailyRitualPage womenSFashionFromDailyRitualPage = new WomenSFashionFromDailyRitualPage(DriverFactory.getDriver());
+        FashionFromDailyRitualPage womenSFashionFromDailyRitualPage = new FashionFromDailyRitualPage(DriverFactory.getDriver());
         womenSFashionFromDailyRitualPage.waitForWomenSFashionFromDailyRitualPageLoaded();
         womenSFashionFromDailyRitualPage.clickOnFilterButtonUpTo25();
         softAssert.assertTrue(womenSFashionFromDailyRitualPage.makeSureTheValuesAreEqualToOrLessThan2500Cents());
