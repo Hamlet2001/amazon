@@ -23,6 +23,13 @@ public class TestAmazon {
         selectedCategoryPage.selectCategoryTwo("Smart Home Lighting");
     }
 
+    public void openHomePageAndClickOnTodaySDealButton() {
+        HomePage homePage = new HomePage(DriverFactory.getDriver());
+        homePage.openHomePage();
+        homePage.waitForHomePageLoaded();
+        homePage.clickOnTodaySDeals();
+    }
+
     @Test
     public void testForChoosingAmazonCategory() {
         String textForSearch = "Java";
@@ -57,7 +64,7 @@ public class TestAmazon {
     }
 
     @Test
-    public void CheckPaginationAndHoveringOnBestSeller() {
+    public void checkPaginationAndHoveringOnBestSeller() {
         selectCategory();
         AllResultsPage allResultsPage = new AllResultsPage(DriverFactory.getDriver());
         allResultsPage.waitForAllResultsPageLoaded();
@@ -67,6 +74,39 @@ public class TestAmazon {
         if (allResultsPage.getCountOfBestSellers() > 0) {
             softAssert.assertFalse(allResultsPage.hoverToBestSeller(2).isEmpty());
         }
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void checkFilteringFunctionality() {
+        openHomePageAndClickOnTodaySDealButton();
+        TodaySDealsPage todaySDealsPage = new TodaySDealsPage(DriverFactory.getDriver());
+        todaySDealsPage.waitTodaySDealsPageLoaded();
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals("Select All", todaySDealsPage.getTextFromSelectAllButton());
+        String filterItemOne = "Baby";
+        String filterItemTwo = "Electronics";
+        todaySDealsPage.selectTwoFilterItems(filterItemOne, filterItemTwo);
+        todaySDealsPage.waitForTwoFilterItemsLoaded();
+        softAssert.assertTrue(todaySDealsPage.isSelectedTwoFilterCheckboxes(filterItemOne, filterItemTwo));
+        softAssert.assertEquals("Clear", todaySDealsPage.getTextFromClearButton());
+        todaySDealsPage.clickOnClearButton();
+        softAssert.assertFalse(todaySDealsPage.anyCheckboxIsSelected(), "Any checkbox was selected");
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void filterFunctionality() {
+        openHomePageAndClickOnTodaySDealButton();
+        TodaySDealsPage todaySDealsPage = new TodaySDealsPage(DriverFactory.getDriver());
+        todaySDealsPage.waitTodaySDealsPageLoaded();
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals("Select All", todaySDealsPage.getTextFromSelectAllButton());
+        todaySDealsPage.clickOnWomenSFashionRitual();
+        WomenSFashionFromDailyRitualPage womenSFashionFromDailyRitualPage = new WomenSFashionFromDailyRitualPage(DriverFactory.getDriver());
+        womenSFashionFromDailyRitualPage.waitForWomenSFashionFromDailyRitualPageLoaded();
+        womenSFashionFromDailyRitualPage.clickOnFilterButtonUpTo25();
+        softAssert.assertTrue(womenSFashionFromDailyRitualPage.makeSureTheValuesAreEqualToOrLessThan2500Cents());
         softAssert.assertAll();
     }
 

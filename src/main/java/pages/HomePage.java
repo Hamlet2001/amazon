@@ -1,6 +1,6 @@
 package pages;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -31,7 +31,12 @@ public class HomePage extends BasePage {
     protected WebElement inputForSearch;
     @FindBy(id = "nav-search-submit-button")
     protected WebElement searchButton;
-
+    @FindBy(linkText = "Today's Deals")
+    protected WebElement todaySDeals;
+    @FindBy(css = "div[data-toaster-slot='DEFAULT']")
+    protected WebElement deliveryAddressChangeText;
+    @FindBy(xpath = "//div[@class='glow-toaster-footer']/span[contains(@class,'dismiss')]")
+    protected WebElement donTChangeButton;
 
     public String getDeliveryAddress() {
         return deliveryAddress.getText();
@@ -45,6 +50,16 @@ public class HomePage extends BasePage {
     public void searchText(String textForSearch) {
         inputForSearch.sendKeys(textForSearch);
         searchButton.click();
+    }
+
+    public void clickOnTodaySDeals() {
+        try {
+            if (deliveryAddressChangeText.isDisplayed()) {
+                donTChangeButton.click();
+            }
+        } catch (NoSuchElementException ignored) {
+        }
+        todaySDeals.click();
     }
 
     public void waitForHomePageLoaded() {
